@@ -4,20 +4,20 @@ let overlayGraphics;
 function setup() {
   // 建立全螢幕畫布
   createCanvas(windowWidth, windowHeight);
-  background('#bde0fe'); // 柔和的背景色
+  background('#dde5b6'); // 設定背景顏色為 #dde5b6
 
   // 初始化攝影機捕捉
   capture = createCapture(VIDEO);
   capture.size(windowWidth * 0.8, windowHeight * 0.8);
   capture.hide();
 
-  // 初始化createGraphics
+  // 初始化 createGraphics
   overlayGraphics = createGraphics(windowWidth * 0.8, windowHeight * 0.8);
   overlayGraphics.background(0); // 黑色背景
 }
 
 function draw() {
-  background('#bde0fe'); // 柔和的背景色
+  background('#dde5b6'); // 設定背景顏色為 #dde5b6
 
   // 更新 overlayGraphics 的內容
   overlayGraphics.background(0); // 黑色背景
@@ -26,18 +26,22 @@ function draw() {
       // 從 capture 中取樣顏色
       let col = capture.get(x, y);
 
-      // 調整顏色的亮度，讓配色更柔和
-      let r = red(col) * 0.8 + 50;
-      let g = green(col) * 0.8 + 50;
-      let b = blue(col) * 0.8 + 50;
+      // 計算灰階顏色
+      let gray = (red(col) + green(col) + blue(col)) / 3;
 
-      overlayGraphics.fill(r, g, b);
+      // 設定方框顏色（保留 G 值，R 和 B 為 0）
+      let g = green(col);
+      overlayGraphics.fill(0, g, 0);
       overlayGraphics.noStroke();
-      overlayGraphics.ellipse(x + 10, y + 10, 15, 15); // 圓形大小為 15
+      overlayGraphics.rect(x + 1, y + 1, 18, 18); // 方框大小為 18
+
+      // 設定圓的顏色為黑色
+      overlayGraphics.fill(0);
+      overlayGraphics.ellipse(x + 10, y + 10, 5, 5); // 圓形大小為 5
     }
   }
 
-  // 顯示 createGraphics 內容在視訊下方
+  // 顯示 createGraphics 內容在視訊上方
   push();
   translate(width / 2, height / 2);
   imageMode(CENTER);

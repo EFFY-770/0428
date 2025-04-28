@@ -4,7 +4,7 @@ let overlayGraphics;
 function setup() {
   // 建立全螢幕畫布
   createCanvas(windowWidth, windowHeight);
-  background('#a2d2ff');
+  background('#bde0fe');
 
   // 初始化攝影機捕捉
   capture = createCapture(VIDEO);
@@ -13,11 +13,11 @@ function setup() {
 
   // 初始化createGraphics
   overlayGraphics = createGraphics(windowWidth * 0.8, windowHeight * 0.8);
-  overlayGraphics.background('#bde0fe'); // 半透明紅色背景
+  overlayGraphics.background(255, 0, 0, 100); // 半透明紅色背景
 }
 
 function draw() {
-  background('#a2d2ff');
+  background('#bde0fe');
 
   // 水平翻轉攝影機畫面並顯示
   push();
@@ -41,5 +41,5 @@ function windowResized() {
 
   // 調整createGraphics大小
   overlayGraphics = createGraphics(windowWidth * 0.8, windowHeight * 0.8);
-  overlayGraphics.background('#bde0fe'); // 半透明紅色背景
+  overlayGraphics.background(255, 0, 0, 100); // 半透明紅色背景
 }

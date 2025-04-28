@@ -19,8 +19,16 @@ function setup() {
 function draw() {
   background('#dde5b6'); // 設定背景顏色為 #dde5b6
 
+  // 水平翻轉攝影機畫面並顯示在下層
+  push();
+  translate(width / 2, height / 2);
+  scale(-1, 1); // 水平翻轉
+  imageMode(CENTER);
+  image(capture, 0, 0, windowWidth * 0.8, windowHeight * 0.8);
+  pop();
+
   // 更新 overlayGraphics 的內容
-  overlayGraphics.background(0); // 黑色背景
+  overlayGraphics.background(0, 150); // 半透明黑色背景
   for (let x = 0; x < overlayGraphics.width; x += 20) {
     for (let y = 0; y < overlayGraphics.height; y += 20) {
       // 從 capture 中取樣顏色
@@ -41,19 +49,11 @@ function draw() {
     }
   }
 
-  // 顯示 createGraphics 內容在視訊上方
+  // 顯示 createGraphics 內容在最上層
   push();
   translate(width / 2, height / 2);
   imageMode(CENTER);
   image(overlayGraphics, 0, 0);
-  pop();
-
-  // 水平翻轉攝影機畫面並顯示在最上層
-  push();
-  translate(width / 2, height / 2);
-  scale(-1, 1); // 水平翻轉
-  imageMode(CENTER);
-  image(capture, 0, 0, windowWidth * 0.8, windowHeight * 0.8);
   pop();
 }
 
@@ -65,3 +65,4 @@ function windowResized() {
   overlayGraphics = createGraphics(windowWidth * 0.8, windowHeight * 0.8);
   overlayGraphics.background(0); // 黑色背景
 }
+

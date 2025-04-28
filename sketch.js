@@ -19,19 +19,19 @@ function setup() {
 function draw() {
   background('#bde0fe');
 
-  // 水平翻轉攝影機畫面並顯示
+  // 顯示createGraphics內容在視訊下方
+  push();
+  translate(width / 2, height / 2);
+  imageMode(CENTER);
+  image(overlayGraphics, 0, 0);
+  pop();
+
+  // 水平翻轉攝影機畫面並顯示在最上層
   push();
   translate(width / 2, height / 2);
   scale(-1, 1); // 水平翻轉
   imageMode(CENTER);
   image(capture, 0, 0, windowWidth * 0.8, windowHeight * 0.8);
-  pop();
-
-  // 顯示createGraphics內容在視訊上方
-  push();
-  translate(width / 2, height / 2);
-  imageMode(CENTER);
-  image(overlayGraphics, 0, 0);
   pop();
 }
 
